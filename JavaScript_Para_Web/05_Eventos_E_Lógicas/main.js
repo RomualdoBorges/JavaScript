@@ -1,5 +1,11 @@
-function tocaSom(idElementAudio) {
-  document.querySelector(idElementAudio).play();
+function tocaSom(seletorAudio) {
+  const elemento = document.querySelector(seletorAudio);
+
+  if (elemento != null && elemento.localName === "audio") {
+    elemento.play();
+  } else {
+    console.log("Elemento não encontrado ou seletor inválido");
+  }
 }
 
 const listaDeTeclas = document.querySelectorAll(".tecla");
@@ -14,8 +20,11 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) {
   };
 
   //Adicionar a classe ativa quando o usuário apertar o teclado.
-  tecla.onkeydown = function () {
-    tecla.classList.add("ativa");
+  tecla.onkeydown = function (evento) {
+    // Criando uma estrutura de condição.
+    if (evento.code === "Space" || evento.code === "Enter") {
+      tecla.classList.add("ativa");
+    }
   };
 
   //Remover a class ativa quando o o usuário soltar o teclado.
